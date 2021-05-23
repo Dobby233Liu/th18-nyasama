@@ -1,14 +1,12 @@
-# th18-nyasama
-
-TH18 东方虹龙洞喵玉汉化
-
-除了`./nonstd.txt`、`./spellCard.txt`、`./omake(cn).txt`和`./readme(cn).txt`为**UTF-8**编码外，所有涉及注入的文件都应该使用**GB18030**编码
+# 东方虹龙洞 喵玉汉化
 
 ## 文件结构说明
 
 所有中文对话文件均按照`filename.gb18030.txt`命名，如`e01.gb18030.txt`、`st01a.gb18030.txt`
 
-`./thtk/create_allmsg.ps1`脚本文件需要同级目录下有新版[THTK](https://github.com/thpatch/thtk)的`thmsg.exe`程序和`thtk.dll`，release 未更新需要自行编译
+`./create_all＿msg.ps1`脚本文件需要环境变量`PATH`内有新版[THTK](https://github.com/thpatch/thtk)的`thmsg.exe`程序和`thtk.dll`（thtk尚未主动更新新版本，目前请自行编译）
+
+除了`./nonstd.txt`、`./spellCard.txt`、`./omake(cn).txt`和`./readme(cn).txt`为**UTF-8**编码外，所有涉及注入的文件都应该使用**GB18030**编码
 
 对话中一个字符单位为 16 像素，ruby 时注意
 
@@ -19,7 +17,7 @@ TH18 东方虹龙洞喵玉汉化
 ./data/trophy.txt           #成就
 ./dialogue/                 #日文对话文件，Shift-JIS编码
 ./dialogue_cn/              #中文对话文件，需要使用THTK的THMSG将TXT对话打包成MSG格式放入./data/下
-./thtk/create_allmsg.ps1    #把./dialogue_cn/中的txt打包成MSG放入./data/
+./create_all_msg.ps1        #把./dialogue_cn/中的txt编译成MSG放入./data/
 ./config.json               #更新用配置
 ./local_file                #空文件
 ./nonstd.txt                #非标准文本，目前为鬼形兽版本未修改
