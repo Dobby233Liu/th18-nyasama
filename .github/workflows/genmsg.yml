@@ -25,7 +25,11 @@ jobs:
           # 克隆最新支持虹龙洞的版本
           ref: ${{ env.THTK_REF }}
           # 克隆依赖项
-          submodules: 'recursive'
+          #submodules: 'recursive'
+      - name: 克隆依赖项
+        run: |
+          git submodule set-url thanm/libpng https://github.com/glennrp/libpng.git
+          git submodule update --recursive
       - name: 下载 CMake
         uses: lukka/get-cmake@main
       - name: 下载 WinFlexBison
