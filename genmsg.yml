@@ -1,0 +1,49 @@
+name: 生成 msg 文件
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build_thtk:
+    name: 编译 thtk
+
+    runs-on: windows-latest
+
+    env:
+      # 最新支持虹龙洞的版本
+      THTK_REF: bff12bec68ff5395d9f5907fb0c2fd8de3d7981a
+
+    # 参考 thtk 的 Install 自述文件
+    steps:
+      - name: 克隆 thtk
+        uses: actions/checkout@v2
+        with:
+          # 克隆 thtk repo
+          repository: thpatch/thtk
+          # 克隆最新支持虹龙洞的版本
+          ref: ${{ env.THTK_REF }}
+          # 克隆依赖项
+          submodules: 'recursive'
+      - name: 下载 CMake
+        uses: lukka/get-cmake@main
+      - name: 下载 WinFlexBison
+        working-directory: C:/
+        run: |
+          curl -L -s -o winflexbison.zip https://github.com/lexxmark/winflexbison/releases/download/v2.5.24/win_flex_bison-2.5.24.zip
+          mkdir winflexbison
+          7z x winflexbison.zip -oC:\winflexbison -y -aoa -bb0 -bso0
+          del winflexbison.zip
+          echo C:\winflexbison>>%GITHUB_PATH%
+          refreshenv
+      - name: 配置项目
+        run: |
+          mkdir build && cd build
+          cmake .. -G "Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=.
+      - name: 编译项目
+        working-directory: build
+        run: |
+          cmake --build .
+          cmake --install . --config Debug
+          dir
