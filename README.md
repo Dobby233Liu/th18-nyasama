@@ -1,31 +1,61 @@
 # 东方虹龙洞 喵玉汉化
 
+## 翻译时注意
+
+所有中文对话文件均按照`filename.gb18030.txt`命名，如`e01.gb18030.txt`、`st01a.gb18030.txt`。
+
+`./create_all＿msg.ps1`脚本文件需要环境变量`PATH`内有新版[THTK](https://github.com/thpatch/thtk)的`thmsg.exe`程序和`thtk.dll`。（thtk尚未发布支持th18的新版本，请自行编译）
+
+除了`./nonstd.txt`、`./spellCard.txt`、`./omake(cn).txt`和`./readme(cn).txt`为**UTF-8**编码外，所有涉及注入的文件都应该使用**GB18030**编码。
+
+对话中一个字符单位为 16 像素，添加 ruby 时注意。
+
+卡牌说明长于 24 个全角字符会导致出框。
+
 ## 文件结构说明
 
-所有中文对话文件均按照`filename.gb18030.txt`命名，如`e01.gb18030.txt`、`st01a.gb18030.txt`
+* `data`
 
-`./create_all＿msg.ps1`脚本文件需要环境变量`PATH`内有新版[THTK](https://github.com/thpatch/thtk)的`thmsg.exe`程序和`thtk.dll`（thtk尚未主动更新新版本，目前请自行编译）
+  data注入文件
+  - `ability.txt`
+  
+    卡牌说明
+  - `musiccmt.txt`
+  
+    Music Room 曲评
+  - `trophy.txt`
+  
+    成就说明 
+* `dialogue`
 
-除了`./nonstd.txt`、`./spellCard.txt`、`./omake(cn).txt`和`./readme(cn).txt`为**UTF-8**编码外，所有涉及注入的文件都应该使用**GB18030**编码
+  日文对话文件(参照物，Shift-JIS编码)
+* `dialogue_cn`
 
-对话中一个字符单位为 16 像素，添加ruby 时注意
+  中文对话文件，需要使用THTK的THMSG将这些对话打包成MSG格式放入data下（已在github上自动化）
+* `create_all_msg.ps1`
 
-```
-./data/                     #data注入文件
-./data/ability.txt          #卡牌说明（长于24个全角字符会导致出框）
-./data/musiccmt.txt         #Music Room
-./data/trophy.txt           #成就
-./dialogue/                 #日文对话文件，Shift-JIS编码
-./dialogue_cn/              #中文对话文件，需要使用THTK的THMSG将TXT对话打包成MSG格式放入./data/下（已在github上自动化）
-./create_all_msg.ps1        #把./dialogue_cn/中的txt编译成MSG放入./data/（已在github上自动化）
-./config.json               #更新用配置
-./local_file                #空文件
-./nonstd.txt                #非标准文本
-./omake(cn).txt             #omake
-./readme(cn).txt            #readme
-./spellCard.txt             #符卡文本
-./th18c.exe                 #汉化主程序
-```
+  把./dialogue_cn/中的txt编译成MSG放入./data/（已在github上自动化）
+* `config.json`
+
+  更新用配置
+* `local_file`
+
+  空文件（保留）
+* `nonstd.txt`
+
+  非标准（硬编码）文本
+* `omake(cn).txt`
+
+  翻译后的omake
+* `readme(cn).txt`
+
+  翻译后的readme
+* `spellCard.txt`
+
+  符卡名
+* `th18c.exe`
+
+  汉化主程序
 
 ## 游戏运行需要文件
 
