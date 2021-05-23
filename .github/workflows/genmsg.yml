@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_thtk:
+  thtk:
     name: 编译 thtk
 
     runs-on: windows-latest
@@ -15,7 +15,7 @@ jobs:
       # 最新支持虹龙洞的版本
       THTK_REF: bff12bec68ff5395d9f5907fb0c2fd8de3d7981a
 
-    # 参考 thtk 的 Install 自述文件
+    # 参考 thtk 的 INSTALL 自述文件
     steps:
       - name: 克隆 thtk
         uses: actions/checkout@v2
@@ -25,7 +25,8 @@ jobs:
           # 克隆最新支持虹龙洞的版本
           ref: ${{ env.THTK_REF }}
           # 克隆依赖项
-          #submodules: 'recursive'
+          # submodules: 'recursive'
+      # 其实是修复 thtk 的 libpng 引用
       - name: 克隆依赖项
         run: |
           git submodule set-url thanm/libpng https://github.com/glennrp/libpng.git
@@ -56,3 +57,25 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: build\bin
+          name: thtk
+
+  create_all_msg:
+    name: 编译 msg
+    
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        name: 克隆 汉化 repo
+      - name: 下载 thtk
+        uses: actions/download-artifact@v2
+        with:
+          name: thtk
+          path: C:\thtk
+      - name: 加入 PATH
+        run: |
+          echo "C:\thtk\bin" | Out-File -FilePath $Env:GITHUB_PATH -Encoding utf8 -Append
+          refreshenv
+      - name: 编译 msg
+        run: |
+          ./create_all_msg.ps1
