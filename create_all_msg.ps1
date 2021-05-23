@@ -1,8 +1,8 @@
 # thmsg.exe should in PATH
 # this should be run in project root
 
-# create msg from txt
-Get-ChildItem ..\dialogue_cn\ |
+# generate stage msgfiles
+Get-ChildItem .\dialogue_cn\ |
 Where-Object {$_.Name -match '^st.*gb18030' } |
 ForEach-Object{
     $parttern = 'st\d{2}\w'
@@ -12,9 +12,8 @@ ForEach-Object{
     thmsg -c 18 $_.FullName data\$OutName
 }
 
-# create ending from txt
-
-Get-ChildItem ..\dialogue_cn\ |
+# generate ending msgfiles
+Get-ChildItem .\dialogue_cn\ |
 Where-Object {$_.Name -match '^e.*gb18030' } |
 ForEach-Object{
     $parttern = '^e\d{2}'
@@ -23,4 +22,3 @@ ForEach-Object{
     $OutName =  $Base + '.msg'
     thmsg -e -c 18 $_.FullName data\$OutName
 }
-
