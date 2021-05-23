@@ -17,7 +17,14 @@ jobs:
 
     # 参考 thtk 的 INSTALL 自述文件
     steps:
+      - name: 缓存 thtk
+        id: fff
+        uses: actions/cache@v2
+        with:
+          path: build\bin
+          key: windows-build-thpatch-thtk-${{ env.THTK_REF }}
       - name: 克隆 thtk
+        if: steps.fff.outputs.cache-hit != 'true'
         uses: actions/checkout@v2
         with:
           # 克隆 thtk repo
@@ -28,12 +35,15 @@ jobs:
           # submodules: 'recursive'
       # 其实是修复 thtk 的 libpng 引用
       - name: 克隆依赖项
+        if: steps.fff.outputs.cache-hit != 'true'
         run: |
           git submodule set-url thanm/libpng https://github.com/glennrp/libpng.git
           git submodule update --recursive --init
       - name: 下载 CMake
+        if: steps.fff.outputs.cache-hit != 'true'
         uses: lukka/get-cmake@main
       - name: 下载 WinFlexBison
+        if: steps.fff.outputs.cache-hit != 'true'
         working-directory: C:/
         run: |
           curl -L -s -o winflexbison.zip https://github.com/lexxmark/winflexbison/releases/download/v2.5.24/win_flex_bison-2.5.24.zip
@@ -43,11 +53,13 @@ jobs:
           echo "C:\winflexbison" | Out-File -FilePath $Env:GITHUB_PATH -Encoding utf8 -Append
           refreshenv
       - name: 配置项目
+        if: steps.fff.outputs.cache-hit != 'true'
         run: |
           mkdir build && cd build
           mkdir bin
           cmake .. -G "Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}\build\bin"
       - name: 编译项目
+        if: steps.fff.outputs.cache-hit != 'true'
         working-directory: build
         run: |
           cmake --build .
