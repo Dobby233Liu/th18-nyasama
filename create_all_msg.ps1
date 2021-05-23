@@ -1,4 +1,4 @@
-# thmsg.exe should in the same folder
+# thmsg.exe should in PATH
 
 # create msg from txt
 Get-ChildItem ..\dialogue_cn\ |
@@ -8,7 +8,7 @@ ForEach-Object{
     $match = select-string -Pattern $parttern -inputobject $_.BaseName
     $Base = $match.matches.groups[0].value
     $OutName =  $Base + '.msg'
-   .\thmsg.exe -c 18 $_.FullName ..\data\$OutName
+    thmsg -c 18 $_.FullName ..\data\$OutName
 }
 
 # create ending from txt
@@ -20,6 +20,6 @@ ForEach-Object{
     $match = select-string -Pattern $parttern -inputobject $_.BaseName
     $Base = $match.matches.groups[0].value
     $OutName =  $Base + '.msg'
-   .\thmsg.exe -e -c 18 $_.FullName ..\data\$OutName
+    thmsg -e -c 18 $_.FullName ..\data\$OutName
 }
 
