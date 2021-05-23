@@ -31,10 +31,10 @@
   日文对话文件(参照物，Shift-JIS编码)
 * `dialogue_cn`
 
-  中文对话文件，需要使用THTK的THMSG将这些对话打包成MSG格式放入data下（已在github上自动化）
+  中文对话文件，需要使用THTK的THMSG将这些对话编译成MSG格式放入data目录下（已在github上自动化）
 * `create_all_msg.ps1`
 
-  把./dialogue_cn/中的txt编译成MSG放入./data/（已在github上自动化）
+  把dialogue_cn中的txt编译成MSG放入data目录（已在github上自动化）
 * `config.json`
 
   更新用配置
@@ -61,12 +61,10 @@
 
 自行获取
 
-```
-./custom.exe
-./th18.dat
-./th18.exe
-./thbgm.dat
-```
+* ｀custom.exe｀
+* ｀th18.dat｀
+* ｀th18.exe｀
+* ｀thbgm.dat｀
 
 ## TODO
 
@@ -122,7 +120,7 @@
 
 ## 进度说明
 
-| Emoji | 说明                   |
+| 图标 | 说明                   |
 | ----- | ---------------------- |
 | ✅    | 完工                   |
 | ❌    | 未开始修改             |
