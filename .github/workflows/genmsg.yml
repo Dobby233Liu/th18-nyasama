@@ -39,7 +39,7 @@ jobs:
           mkdir winflexbison
           7z x winflexbison.zip -oC:\winflexbison -y -aoa -bb0 -bso0
           del winflexbison.zip
-          echo C:\winflexbison>> %GITHUB_PATH%
+          echo "C:\winflexbison" | Out-File -FilePath $Env:GITHUB_PATH -Encoding utf8 -Append
           refreshenv
       - name: 配置项目
         run: |
