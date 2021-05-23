@@ -8,23 +8,23 @@
 
 除了`./nonstd.txt`、`./spellCard.txt`、`./omake(cn).txt`和`./readme(cn).txt`为**UTF-8**编码外，所有涉及注入的文件都应该使用**GB18030**编码
 
-对话中一个字符单位为 16 像素，ruby 时注意
+对话中一个字符单位为 16 像素，添加ruby 时注意
 
 ```
-./data/                     #对data的注入文件
-./data/ability.txt          #卡牌说明，长于24个全角字符会导致出框
+./data/                     #data注入文件
+./data/ability.txt          #卡牌说明（长于24个全角字符会导致出框）
 ./data/musiccmt.txt         #Music Room
 ./data/trophy.txt           #成就
 ./dialogue/                 #日文对话文件，Shift-JIS编码
-./dialogue_cn/              #中文对话文件，需要使用THTK的THMSG将TXT对话打包成MSG格式放入./data/下
-./create_all_msg.ps1        #把./dialogue_cn/中的txt编译成MSG放入./data/
+./dialogue_cn/              #中文对话文件，需要使用THTK的THMSG将TXT对话打包成MSG格式放入./data/下（已在github上自动化）
+./create_all_msg.ps1        #把./dialogue_cn/中的txt编译成MSG放入./data/（已在github上自动化）
 ./config.json               #更新用配置
 ./local_file                #空文件
-./nonstd.txt                #非标准文本，目前为鬼形兽版本未修改
+./nonstd.txt                #非标准文本
 ./omake(cn).txt             #omake
 ./readme(cn).txt            #readme
 ./spellCard.txt             #符卡文本
-./th18c.exe                 #喵玉汉化主程序
+./th18c.exe                 #汉化主程序
 ```
 
 ## 游戏运行需要文件
