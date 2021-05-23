@@ -44,10 +44,15 @@ jobs:
       - name: 配置项目
         run: |
           mkdir build && cd build
-          cmake .. -G "Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=.
+          mkdir bin
+          cmake .. -G "Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX="${{ github.workplace }}\build\bin"
       - name: 编译项目
         working-directory: build
         run: |
           cmake --build .
           cmake --install . --config Debug
-          dir
+      # 供之后使用
+      - name: 上传 thtk
+        uses: actions/upload-artifact@v2
+        with:
+          path: ${{ github.workplace }}\build\bin
