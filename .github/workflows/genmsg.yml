@@ -90,11 +90,7 @@ jobs:
           echo "C:\thtk\bin" | Out-File -FilePath $Env:GITHUB_PATH -Encoding utf8 -Append
           refreshenv
       - name: 设置提交作者
-        uses: fregante/setup-git-token@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: github-actions[bot]
-          email: 41898282+github-actions[bot]@users.noreply.github.com
+        uses: fregante/setup-git-user@v1
       - name: rebase repo
         run: |
           git pull --rebase
@@ -102,6 +98,7 @@ jobs:
         run: |
           ./create_all_msg.ps1
       - name: 提交
+        continue-on-error: true
         run: |
           git commit -am "生成对话文件"
           git push
