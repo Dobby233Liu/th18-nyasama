@@ -1,4 +1,5 @@
 # thmsg.exe should in PATH
+# this should be run in project root
 
 # create msg from txt
 Get-ChildItem ..\dialogue_cn\ |
@@ -8,7 +9,7 @@ ForEach-Object{
     $match = select-string -Pattern $parttern -inputobject $_.BaseName
     $Base = $match.matches.groups[0].value
     $OutName =  $Base + '.msg'
-    thmsg -c 18 $_.FullName ..\data\$OutName
+    thmsg -c 18 $_.FullName data\$OutName
 }
 
 # create ending from txt
@@ -20,6 +21,6 @@ ForEach-Object{
     $match = select-string -Pattern $parttern -inputobject $_.BaseName
     $Base = $match.matches.groups[0].value
     $OutName =  $Base + '.msg'
-    thmsg -e -c 18 $_.FullName ..\data\$OutName
+    thmsg -e -c 18 $_.FullName data\$OutName
 }
 
