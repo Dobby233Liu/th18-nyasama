@@ -29,7 +29,7 @@ jobs:
       - name: 克隆依赖项
         run: |
           git submodule set-url thanm/libpng https://github.com/glennrp/libpng.git
-          git submodule update --recursive
+          git submodule update --recursive --init
       - name: 下载 CMake
         uses: lukka/get-cmake@main
       - name: 下载 WinFlexBison
@@ -39,7 +39,7 @@ jobs:
           mkdir winflexbison
           7z x winflexbison.zip -oC:\winflexbison -y -aoa -bb0 -bso0
           del winflexbison.zip
-          echo C:\winflexbison>>%GITHUB_PATH%
+          echo C:\winflexbison>> %GITHUB_PATH%
           refreshenv
       - name: 配置项目
         run: |
